@@ -50,7 +50,7 @@ function applyFilter() {
       headerRow.insertCell().textContent = 'Codice Fermata';
       headerRow.insertCell().textContent = 'Veicolo';
       headerRow.insertCell().textContent = ' ';
-      headerRow.insertCell().textContent = 'Orario';
+      headerRow.insertCell().textContent = 'Ultimo Aggiornamento';
 
       // Aggiungi i dati alla tabella
       const tbody = table.createTBody();

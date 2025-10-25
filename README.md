@@ -1,9 +1,11 @@
 # Start Romagna Live Bus
 Start Romagna Live Bus Website
+This is a clone from https://git.vichingo455.freeddns.org/emmev-code/start-livebus, adapted for my ER-TPL project.
 ## How to use
 1. Download and run the [API](https://git.vichingo455.freeddns.org/emmev-code/start-livebus-api)
 2. Modify [js/script.js](https://git.vichingo455.freeddns.org/emmev-code/start-livebus/src/branch/main/js/script.js) ``API_ADDRESS_PLACEHOLDER`` with your API address (example: ``http://localhost:3001/``)
 3. Open the index.html page
 
 ## Rights and credits
-Start Romagna, Start and the Start Romagna logo are registered trademarks and protected by copyright by Start Romagna SpA. They are used here only for reference.
+- Start Romagna, Start and the Start Romagna logo are registered trademarks and protected by copyright by Start Romagna SpA. They are used here only for reference.
+- Vichingo455 as they're the original creator.

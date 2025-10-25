@@ -10,9 +10,6 @@ function applyFilter() {
     const rows = table.querySelectorAll('tr');
 
     rows.forEach((row, index) => {
-      // Non applicare il filtro sulla prima riga (intestazione)
-      if (index === 0) return;
-
       const cells = row.getElementsByTagName('td');
       let match = true;
 
@@ -25,6 +22,15 @@ function applyFilter() {
       // Mostra o nascondi la riga in base al filtro
       row.style.display = match ? '' : 'none';
     });
+  }
+  function numeromezzi() {
+    const table = document.getElementById('tabella');
+    //let nummezzi = table.tBodies[0].rows.length;
+    const rows = table.querySelectorAll('tbody tr');
+    const visibili = Array.from(rows).filter(row => {
+      return window.getComputedStyle(row).display !== 'none';
+    });
+    document.getElementById('nummezzi').innerHTML = visibili.length;
   }
   fetchData(); // Primo fetch
   // Fetch dei dati ogni 30 secondi (30 000 millisecondi)
@@ -43,26 +49,27 @@ function applyFilter() {
       const table = document.createElement('table');
 
       // Aggiungi l'intestazione della tabella
-      var th = document.createElement('th');
-      var tr = document.createElement('tr');
+      let th = document.createElement('th');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
       th.innerHTML='Zona';
-      tr.appendChild(th);
+      thead.appendChild(th);
       th = document.createElement('th');
       th.innerHTML='Linea';
-      tr.appendChild(th);
+      thead.appendChild(th);
       th = document.createElement('th');
       th.innerHTML='Fermata';
-      tr.appendChild(th);
+      thead.appendChild(th);
       th = document.createElement('th');
       th.innerHTML='Codice fermata';
-      tr.appendChild(th);
+      thead.appendChild(th);
       th = document.createElement('th');
       th.innerHTML='Veicolo';
-      tr.appendChild(th);
+      thead.appendChild(th);
       th = document.createElement('th');
       th.innerHTML='Ultimo aggiornamento';
-      tr.appendChild(th);
-      table.appendChild(tr);
+      thead.appendChild(th);
+      table.appendChild(thead);
 
       // Aggiungi i dati alla tabella
       data.forEach(row => {
@@ -74,13 +81,15 @@ function applyFilter() {
             rowt.appendChild(cell);
           }
         });
-        table.appendChild(rowt);
+        tbody.appendChild(rowt);
       });
-
+      table.appendChild(tbody);
       // Aggiungi la tabella alla pagina
       container.appendChild(table);
+      table.id = "tabella";
       // Preserva il filtro
       applyFilter();
+      numeromezzi();
     })
     .catch(err => {
       //console.error("Errore nel caricamento dati:", err);
@@ -102,6 +111,7 @@ function applyFilter() {
     document.getElementById("filterCodiceFermata").value = "";
     // Esegui la funzione per applicare i filtri (per sicurezza)
     applyFilter();
+    numeromezzi();
   }
 
   setInterval(updateClock, 1000);
@@ -111,3 +121,7 @@ document.getElementById('filterZona').addEventListener('input', applyFilter);
 document.getElementById('filterLinea').addEventListener('input', applyFilter);
 document.getElementById('filterVeicolo').addEventListener('input', applyFilter);
 document.getElementById('filterCodiceFermata').addEventListener('input', applyFilter);
+document.getElementById('filterZona').addEventListener('input', numeromezzi);
+document.getElementById('filterLinea').addEventListener('input', numeromezzi);
+document.getElementById('filterVeicolo').addEventListener('input', numeromezzi);
+document.getElementById('filterCodiceFermata').addEventListener('input', numeromezzi);

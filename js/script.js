@@ -1,3 +1,4 @@
+const apiurl = 'https://api.vichingo455.freeddns.org/infobus/';
 // Funzione per applicare il filtro su ogni colonna
 function applyFilter() {
     const filterZona = document.getElementById('filterZona').value.toLowerCase();
@@ -32,7 +33,7 @@ function applyFilter() {
   }, 30000);
   // Fetch dei dati e creazione della tabella
   function fetchData() {
-    fetch('API_ADDRESS_PLACEHOLDER')
+    fetch(apiurl)
     .then(response => response.json())
     .then(data => {
       const container = document.getElementById('data-container');
@@ -42,24 +43,38 @@ function applyFilter() {
       const table = document.createElement('table');
 
       // Aggiungi l'intestazione della tabella
-      const header = table.createTHead();
-      const headerRow = header.insertRow();
-      headerRow.insertCell().textContent = 'Zona';
-      headerRow.insertCell().textContent = 'Linea';
-      headerRow.insertCell().textContent = 'Fermata';
-      headerRow.insertCell().textContent = 'Codice Fermata';
-      headerRow.insertCell().textContent = 'Veicolo';
-      headerRow.insertCell().textContent = ' ';
-      headerRow.insertCell().textContent = 'Ultimo Aggiornamento';
+      var th = document.createElement('th');
+      var tr = document.createElement('tr');
+      th.innerHTML='Zona';
+      tr.appendChild(th);
+      th = document.createElement('th');
+      th.innerHTML='Linea';
+      tr.appendChild(th);
+      th = document.createElement('th');
+      th.innerHTML='Fermata';
+      tr.appendChild(th);
+      th = document.createElement('th');
+      th.innerHTML='Codice fermata';
+      tr.appendChild(th);
+      th = document.createElement('th');
+      th.innerHTML='Veicolo';
+      tr.appendChild(th);
+      th = document.createElement('th');
+      th.innerHTML='Ultimo aggiornamento';
+      tr.appendChild(th);
+      table.appendChild(tr);
 
       // Aggiungi i dati alla tabella
-      const tbody = table.createTBody();
       data.forEach(row => {
-        const rowElement = tbody.insertRow();
+        const rowt = document.createElement('tr');
         row.forEach(cellData => {
-          const cell = rowElement.insertCell();
-          cell.textContent = cellData;
+          if(cellData!=""){
+            const cell = document.createElement('td');
+            cell.innerHTML = cellData;
+            rowt.appendChild(cell);
+          }
         });
+        table.appendChild(rowt);
       });
 
       // Aggiungi la tabella alla pagina
